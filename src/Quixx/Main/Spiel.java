@@ -1,8 +1,12 @@
-package src.Quixx.Logik;
+package src.Quixx.Main;
+
+import src.Quixx.Data.Data_Spieler;
+import src.Quixx.Logik.Spieler;
+import src.Quixx.Logik.Wuerfel;
 
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.util.InputMismatchException;
+
 public class Spiel{
     // Anfang Attribute
     private int gemerktePunkte;
@@ -382,6 +386,7 @@ public class Spiel{
         Wuerfel wuerfel = new Wuerfel();
         sechsWuerfeln(wuerfel);
         boolean eins = weissStreichenAktiv(aktiverSpieler);
+        Data_Spieler.write(aktiverSpieler);
         checkLock();
         weissStreichenPassiv(aktiverSpieler);
         checkLock();
@@ -397,6 +402,7 @@ public class Spiel{
             System.out.println(player.getName() + ":");
             getZahlen(player);
             System.out.println();
+            Data_Spieler.write(player);
         }
     }
 
@@ -456,6 +462,7 @@ public class Spiel{
 
     public Spieler komplettesSpiel(){
         Spieler gewinner = null;
+        loadGame();
         if (spieler.size()<2) {
             throw new IllegalArgumentException("Es müssen mindestens 2 Spieler teilnehmen!");
         }
@@ -467,10 +474,18 @@ public class Spiel{
             if (points>meistePunkte) {
                 gewinner = player;
             }
+            Data_Spieler.deleteFile(player.getName());
         }
 
         System.out.println("\nHURRAAAAAA DER GEWINNER IST: " + gewinner);
         return gewinner;
+    }
+
+    public void loadGame(){
+        ArrayList<Spieler> player = Data_Spieler.getSpieler();
+        if (player.size()>=2){
+            spieler = player;
+        }
     }
 
     public String toString(){
@@ -481,15 +496,17 @@ public class Spiel{
         Spiel hihi = new Spiel();
 
 
-        hihi.addSpieler(new Spieler("Ceyhun"));
-        hihi.addSpieler(new Spieler("Arziz"));
-        //hihi.addSpieler(new Spieler("Cam/Fenster"));
+        //hihi.addSpieler(new Spieler("Ceyhun"));
+        //hihi.addSpieler(new Spieler("Arziz"));
+        //hihi.addSpieler(new Spieler("Cam"));
 
         //hihi.addSpieler(new Spieler("Ja"));
         //hihi.addSpieler(new Spieler("Man"));
         //hihi.addSpieler(new Spieler("x"));
+        //hihi.spieler =
 
         hihi.komplettesSpiel();
+
     }
 
     // Ende Methoden

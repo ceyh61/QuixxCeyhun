@@ -1,7 +1,8 @@
 package src.Quixx.Logik;
 
-import java.util.ArrayList;
-public class Spieler{
+import java.io.Serializable;
+
+public class Spieler implements Serializable{
     private String name;
     public Spielkarte spielkarte;
     private int punktestand;

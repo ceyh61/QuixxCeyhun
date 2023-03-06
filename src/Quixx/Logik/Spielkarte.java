@@ -1,6 +1,8 @@
 package src.Quixx.Logik;
 
-public class Spielkarte{
+import java.io.Serializable;
+
+public class Spielkarte implements Serializable {
     // Anfang Attribute
     private int fehlwuerfe;
     private int[] gruen;
