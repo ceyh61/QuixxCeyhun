@@ -1,4 +1,4 @@
-package src;
+package src.Quixx.Logik;
 
 public class Spielerkarte {
 }
